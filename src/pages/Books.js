@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
@@ -6,6 +6,21 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import axios from "axios";
+
+
+function bookSearch() {
+    const [books, setBooks] = useState([]);
+
+    const searchBooks = query => {
+       axios 
+       .get(`https://www.googleapis.com/books/v1/volumes?q=${query}`)
+       .then(googBooks => {
+           setBooks(googBooks.data.items);
+       });
+    };
+
+}
 
 class Books extends Component {
   state = {
@@ -18,15 +33,37 @@ class Books extends Component {
   };
 
   componentDidMount() {
-    this.loadBooks();
-  }
+      this.loadBooks();
+    }
+    
+    loadBooks = () => {
+        API.getBooks()
+        .then(res =>
+            this.setState({ books: res.data, title: "", author: "", description: "", image: "", link: ""})
+            )
+            .catch(err => console.log(err));
+    };
+        
 
-  loadBooks = () => {
-    API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", description: "", image: "", link: ""})
-      )
-      .catch(err => console.log(err));
+  deleteBook = id => {
+      API.deleteBook(id)
+        .then(res => this.loadBooks())
+        .catch(err => console.log(err));
+  };
+
+  handleInputChange = event => {
+      const { name, value } = event.target;
+      this.setState({
+          [name]: value
+      });
+  };
+
+  handleFormSubmit = (event, query) => {
+      event.preventDefault();
+      if(query) {
+          return this.searchBooks(query);
+      }
+      
   }
   
   render() {
@@ -50,12 +87,10 @@ class Books extends Component {
                             name="author"
                             placeholder="Author (required)"
                           />
-                          <TextArea
-                            value={this.state.description}
-                            onChange={this.handleInputChange}
-                            name="description"
-                            placeholder="Description (optional)"
-                          />
+                          <div className="apiBooks">
+
+                          </div>
+
                           <FormBtn
                             disabled={!(this.state.author && this.state.title)}
                             onClick={this.handleFormSubmit}
