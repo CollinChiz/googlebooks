@@ -8,6 +8,6 @@ export default {
         return axios.delete("/api/books/" + id);
     },
     saveBook: function(bookData) {
-        return axios.post("/api/books", bookData);
+        return axios.post("/api/books/" + bookData);
     }
 };
