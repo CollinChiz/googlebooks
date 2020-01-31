@@ -31,13 +31,9 @@ const addBook = (e, bookId) => {
         image: bookImg,
         link: bookClicked.volumeInfo.link
     }
-    // axios.post("/api/books", data).then(res => {
-    //     console.log("BOOK ADDED");
-    // });
-
-    API.saveBook(data).then(res => {
+    axios.post("/api/books/", data).then(res => {
         console.log("BOOK ADDED");
-    })
+    });
 
 };
 

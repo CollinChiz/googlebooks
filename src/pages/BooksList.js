@@ -11,7 +11,7 @@ export default function BookList() {
     }, []);
 
     const fetchBooks = () => {
-        axios.get("/api/books").then(booksDB => {
+        axios.get("/api/books/").then(booksDB => {
             setBooks(booksDB.data);
             console.log(books);
         });
