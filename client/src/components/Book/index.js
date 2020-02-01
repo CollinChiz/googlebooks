@@ -23,7 +23,7 @@ export default function Book(props) {
             </ul>
             <div className="card-body">
                 <button
-                  className="btn btn-primary btn-success"
+                  className="btn btn-primary btn-Danger"
                   value={props.button}
                   onClick={props.button === "add" ? e => props.addBook(e, props.id) : () => props.deleteBook(props._id)}
                 >
