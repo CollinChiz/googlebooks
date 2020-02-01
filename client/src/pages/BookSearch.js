@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Book from "../components/Book";
 import Search from "../components/Search";
 import axios from "axios";
-import API from "../utils/API";
 
 export default function BookSearch() {
 
