@@ -2,19 +2,13 @@
   "homepage": "http://{CollinChiz}.github.io/{googlebooks}",
   "name": "googlebooks",
   "version": "0.1.0",
+  "main": "server.js",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.1",
-    "bootstrap": "^4.4.1",
-    "mongoose": "^5.8.9",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
-    "usestate": "^1.1.3"
+    "axios": "^0.19.2",
+    "express": "^4.16.3",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.8.11"
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -41,7 +35,7 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^5.1.0",
-    "gh-pages": "^2.2.0"
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.7"
   }
 }
